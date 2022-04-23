@@ -1,0 +1,18 @@
+<div class="book-navbar">
+  <%- partial('_partials/navbar') %>
+</div>
+
+<div class="book-post">
+  <%-page.content%>
+
+  <hr/>
+  <p>Este trabalho está licenciado com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons - Atribuição-NãoComercial 4.0 Internacional</a>.</p>
+</div>
+
+<% if(page.comments != false) { %>
+  <div class="book-comments">
+    <%- partial('_partials/comments') %>
+  </div>
+<% } %>
+
+<%- js('/js/book-post') %>
