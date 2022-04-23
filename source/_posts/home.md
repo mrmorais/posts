@@ -1,6 +1,6 @@
 # 🤠
 
-<small style="color: #919191;">Mais recentemente atualizado em 03 de março de 2020</small>
+<small style="color: #919191;">Mais recentemente atualizado em 23 de abril de 2022</small>
 
 [💻 GitHub](https://github.com/mrmorais) [📝 Medium](https://medium.com/@mrmorais) [🥚 Twitter](https://twitter.com/maradona_) [💼 Portifólio](/portifolio/index.html)<i style="color: red">*</i>
 
