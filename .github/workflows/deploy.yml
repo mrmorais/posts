@@ -34,5 +34,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        external_repository: mrmorais/try_deploy_blog
+        external_repository: mrmorais/mrmorais.github.io
         publish_dir: ./public
