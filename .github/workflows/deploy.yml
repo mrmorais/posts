@@ -36,3 +36,4 @@ jobs:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: mrmorais/mrmorais.github.io
         publish_dir: ./public
+        cname: posts.mrmorais.com
