@@ -1,5 +1,8 @@
 - [Home](/)
 - [Sobre](/about)
+- 2022
+  - Outubro
+    - [Retorno de processamento assíncrono com Redis e GraphQL Subscriptions](/Retorno-de-processamento-assincrono-com-Redis-e-GraphQL-Subscriptions)
 - 2019
   - Outubro
     - [Testes com Consumer-Driven Contracts](/Testes-com-Consumer-Driven-Contracts)

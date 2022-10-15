@@ -1,12 +1,13 @@
 # 🤠
 
-<small style="color: #919191;">Mais recentemente atualizado em 23 de abril de 2022</small>
+<small style="color: #919191;">Mais recentemente atualizado em 15 de outubro de 2022</small>
 
 [💻 GitHub](https://github.com/mrmorais) [📝 Medium](https://medium.com/@mrmorais) [🥚 Twitter](https://twitter.com/maradona_)
 
 > Este é um blog pessoal sobre tópicos de tecnologia, desenvolvimento de software e outros temas.
 
 ### Últimos artigos
+- [Retorno de processamento assíncrono com Redis e GraphQL Subscriptions](/Retorno-de-processamento-assincrono-com-Redis-e-GraphQL-Subscriptions) 15/10/2022
 - [Testes com Consumer-Driven Contracts](/Testes-com-Consumer-Driven-Contracts) 24/10/2019
 - [(English) The Lazy World of Clojure](/The-Lazy-World-of-Clojure) 08/10/2019
 - [Medindo qualidade do serviço Uber X em Natal/RN](/Medindo-qualidade-do-servico-Uber-X-em-Natal-RN) 23/09/2017
