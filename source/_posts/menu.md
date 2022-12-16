@@ -3,6 +3,8 @@
 - 2022
   - Outubro
     - [Retorno de processamento assíncrono com Redis e GraphQL Subscriptions](/Retorno-de-processamento-assincrono-com-Redis-e-GraphQL-Subscriptions)
+  - Dezembro
+    - [Criando um jogo interativo "real-time" com Kafka, kSQL e Vert.x](/criando-um-jogo-interativo-real-time-com-kafka-ksql-e-vert-x)
 - 2019
   - Outubro
     - [Testes com Consumer-Driven Contracts](/Testes-com-Consumer-Driven-Contracts)
