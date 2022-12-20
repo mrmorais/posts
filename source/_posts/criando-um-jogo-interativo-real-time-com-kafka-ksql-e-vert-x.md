@@ -6,23 +6,26 @@ tags: []
 
 # Criando um jogo interativo "real-time" com Kafka, kSQL e Vert.x
 
-Buscando uma forma de ter um contato inicial com kSQL e Vert.x e entender otimizações e limitações, lembrei de uma demo por Aaron Lee em uma talk "Coding to Be Event-Driven” em que ele usou uma corrida de barcos em um game "click-fast”. Achei uma ótima ideia adaptar as tecnologias e mudar um pouco o contexto (e fazer com carros no lugar de barcos). Nesse sentido, neste artigo pretendo introduzir sobre kSQL e Vert.x e como foram aplicados neste projeto.
+Buscando um contato inicial com kSQL e Vert.x assim como entender otimizações e limitações dessas tecnologias, lembrei de uma demo por Aaron Lee em uma talk "Coding to Be Event-Driven” em que ele usou uma corrida de barcos em um game "click-fast”. Achei uma ótima ideia adaptar as tecnologias e mudar um pouco o contexto (e fazer com carros no lugar de barcos). Nesse sentido, este artigo pretende introduzir sobre kSQL e Vert.x e como foram aplicados no projeto.
 
-Antes, vamos à ideia! O conceito é simples. Ao acessar a sessão do game, você é associado à um time (vermelho ou verde) e quando o host der início à partida seu dever — pelo time — é clicar no botão "Clique!” em 20 segundos. Ganha o time com mais cliques.
+Antes, vamos à ideia! O conceito é bem simples. Ao acessar a sessão do game, você é associado a um time (RED ou GREEN) e quando o host der início à partida seu dever — pelo time — é clicar no botão "Clique!” em 20 segundos. Ganha o time com mais cliques.
 
 ![](./images/cars-race-demo.png)
 
-O objetivo prático do game é simples: contar cliques e associar estes cliques a times. Bom, tem uma questão temporal pois todos devem começar juntos, tem uma questão de organizar os times de forma balanceada mas o core é contar cliques.
+O objetivo prático do game é simples: contar cliques e associar estes cliques a times. Alguns desafios (ou requisitos) inclusos são:
+- Pontuações em tempo real: todos participantes acompanham os carros se moverem e a contagem de cliques sendo atualizada durante a partida, instigando mais competição e mais interação.
+- Times balanceados: conforme os participantes entram na sessão os times são designados de forma a balancear a quantidade entre os times
+- Início coordenado: os participantes devem começar a clicar no mesmo momento, e durante 20 segundos. Para isso o sistema deve comunicar todos os participantes sobre o início da partida no mesmo momento.
 
-Da forma mais simples, podemos ter um processo todo em memória em que duas variáveis `score_red` e `score_green` são incrementadas e consultadas pelos participantes. Esta foi a minha implementação inicial para ter o projeto já funcionando.
+Da forma mais simples, podemos ter um processo todo em memória em que duas variáveis `score_red` e `score_green` são incrementadas e consultadas pelos participantes. Esta foi a minha implementação inicial para ter o projeto já funcionando. No entanto, introduzindo algumas ferramentas de stream pode dar uma maior poder de escalabilidade e interatividade do game.
 
 ## Vert.x
 
-Vert.x é um toolkit com um conjunto de APIs Java para construir aplicações reativas que são escaláveis e resilientes. Os principais fatores para optar neste projeto foram a forma de abstração que o Vert.x dá para otimização de uso dos recursos — dá para desenvolver sem ter tanta preocupação com threading e concorrência — e estrutura modular que permitiu montar os componentes necessários com pouca configuração e dependências. Funcionalidades já prontas para integrar WebSocket com Event Bus, clients de Kafka, etc. — que devo comentar melhor adiante.
+Vert.x é um toolkit com um conjunto de APIs Java para construir aplicações reativas que são escaláveis e resilientes. Os principais fatores para optar neste projeto foram a forma de abstração que o Vert.x dá para otimização de uso dos recursos — dá para desenvolver sem ter tanta preocupação com threading e concorrência — e estrutura modular que permitiu montar os componentes necessários com pouca configuração e dependências. Além de funcionalidades já prontas para integrar WebSocket com Event Bus, clients de Kafka, etc. — que devo comentar melhor adiante.
 
-Um conceito interessante é o de “Verticles” que o Vert.x define como deployment "actor-like” e modelo de concorrência. Dá para pensar como sendo uma thread ou um processo acessível por eventos.
+Um conceito interessante do Vert.x é o de “Verticles” que se define como um deployment "actor-like” e modelo de concorrência. Dá para pensar como sendo uma thread (ou um objeto remoto) acessível por eventos.
 
-Aqui utilizei verticles para representar as sessions, ou seja, cada partida do game. Basicamente quando o usuário cria uma partida, uma verticle é deployada com as informações e o seu ciclo de vida (pontuações, status, time vencedor).
+Aqui utilizei verticles para representar as sessions, ou seja, cada partida do game. Basicamente quando o usuário cria uma partida, uma verticle é deployada com as informações e o seu ciclo de vida (pontuações, status, time vencedor, etc).
 
 ```java
 public class CarRaceVerticle extends AbstractVerticle {
@@ -47,9 +50,9 @@ public class CarRaceVerticle extends AbstractVerticle {
 }
 ```
 
-Como a ideia é ter uma aplicação event-driven, o Vert.x possui o Event Bus, uma API com semântica pub/sub em que o verticles podem se inscrever ou gerar eventos nesses tópicos. É possível também conectar o Event Bus o front-end, o que foi feito nesse projeto usando o SockJS, assim o front-end também consegue se inscrever e publicar eventos.
+Como a comunicação é dirigida por eventos o Vert.x possui o Event Bus, uma API com semântica pub/sub em que o verticles podem se inscrever ou publicar eventos em tópicos. É possível também conectar o Event Bus com o front-end através de Websocket, o que foi feito nesse projeto usando o SockJS, assim o front-end também consegue se inscrever e publicar eventos.
 
-A conexão com o Kafka também foi feita por meio de um verticle, que também consome e publica no Event Bus.
+A conexão com o Kafka também foi feita por meio de um verticle contendo dois clients Kafka: um producer e um consumer. O producer para produzir registros de clicks no tópico Kafka e o consumer para consumir atualizações de pontuações.
 
 ![](./images/cars-race-diagram.png)
 
@@ -61,11 +64,11 @@ Quando o usuário clica no botão no front-end:
 
 ## Kafka e kSQL
 
-A segunda etapa é determinar de fato as pontuações de uma partida e notificar todos os participantes sobre as pontuações, preferencialmente próximo a tempo real. Para isso optei por uma organização bem simples usando o kSQL — que nada mais é do que um banco de dados voltado para streams de dados com uma semântica SQL.
+A próxima etapa é determinar de fato as pontuações de uma partida e notificar todos os participantes sobre as pontuações, preferencialmente próximo a tempo real. Para isso optei por uma organização bem simples usando o kSQL -— que nada mais é do que um banco de dados voltado para streams de dados com uma semântica SQL.
 
 É possível criar streams a partir de tópicos Kafka e criar views materializadas (ou mesmo tabelas) com a agregação de dados dos streams.
 
-Antes de entrar nas queries que criam a view para este projeto, vamos ver quais escolhas de otimização de produção e consumo no tópico Kafka foram usadas. Após poucos testes aqui optei por priorizar a latência — principalmente por ser uma demo e não ter escalabilidade em número de participantes.
+Antes de entrar nas queries que criam a view para este projeto, vamos ver quais escolhas de otimização de produção e consumo no tópico Kafka foram usadas. Após poucos testes aqui optei por priorizar a latência — principalmente por ser uma demo e não ter escalabilidade em número de participantes por sessão.
 
 ### linger.ms = 0
 
@@ -105,14 +108,14 @@ CREATE TABLE car_race_scores WITH (format='json') AS
 
 Primeiro agrupamos a query por sessão e time com o `GROUP BY session, team` para que a pontuação que vamos calcular seja única por time e por partida. O `COUNT(team) as score` define que a pontuação nada mais é do que a contagem de quantas vezes aquele time aparece no stream, naquela sessão.
 
-Por fim, com o `EMIT CHANGES` indicamos que quando for atualizada, esta tabela emitirá eventos. Isto é importante para capturar a mudança de pontuações e atualizar o painel no front-end.
+Por fim, com o `EMIT CHANGES` indicamos que quando for atualizada, esta tabela emitirá eventos. Isto é importante para capturar a mudança de pontuação e atualizar o painel no front-end.
 
-O verticle do Kafka, que também é um consumidor fica "inscrito” no tópico em que essas atualizações são criadas e quando há uma mudança de pontuações ele informa ao verticle da sessão em questão que informa a todos os participantes da sessão (tudo isso através do Event Bus e via broadcast, no caso de notificar os clients).
+O verticle do Kafka, que também é um consumidor fica "inscrito” no tópico em que essas atualizações são criadas e quando há uma mudança de pontuação ele informa ao verticle da sessão em questão que informa a todos os participantes da sessão (tudo isso através do Event Bus e via broadcast, no caso de notificar a todos).
 
-Dessa forma, de ponta a ponta, temos um projeto básico de um game interativo, escalável e próximo ao tempo real. É importante dizer que estas tecnologias e a forma de utilizá-las foram o que direcionaram o projeto e não o contrário — provavelmente dá para atingir uma melhor performance e/ou escalabilidade com outro conjunto de tecnologias.
+Dessa forma, de ponta a ponta, temos um projeto básico de um game interativo, escalável e próximo ao tempo real. É importante dizer que estas tecnologias e a forma de utilizá-las foram o que direcionaram o projeto e não o contrário — certamente dá para atingir uma melhor performance e/ou escalabilidade com outro conjunto de tecnologias.
 
 Entender como tunar o Kafka para entregar com maior rapidez é muito importante quando usamos essa tecnologia e sempre vai depender do tipo de dados, cadência e uma série de fatores — não há uma configuração que sirva para tudo.
 
-O Vert.x neste contexto de aplicação dirigida por eventos teve um ótimo fit, possibilitando criar objetos "atores” com seus ciclos de vida independentes e com gestão abstraída de threads, temporizadores e afins, de forma que não há, por exemplo uma necessidade de desenvolver um orquestrador/controlador, já que há uma semântica pub/sub, ou tratar os eventos de forma stateless, com o conceito de verticles.
+O Vert.x neste contexto de aplicação dirigida por eventos teve um ótimo fit, possibilitando criar objetos "atores” com seus ciclos de vida independentes e com gestão abstraída de threads, temporizadores e afins, de forma que não há, por exemplo, uma necessidade de desenvolver um orquestrador/controlador, já que há uma semântica pub/sub, ou tratar os eventos de forma stateless, com o conceito de verticles.
 
 Todo o código envolvido no projeto estão disponível [neste repositório do GitHub](https://github.com/mrmorais/racing-cars-demo).
