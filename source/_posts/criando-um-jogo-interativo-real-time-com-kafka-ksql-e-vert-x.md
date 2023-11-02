@@ -13,6 +13,7 @@ Antes, vamos à ideia! O conceito é bem simples. Ao acessar a sessão do game, 
 ![](./images/cars-race-demo.png)
 
 O objetivo prático do game é simples: contar cliques e associar estes cliques a times. Alguns desafios (ou requisitos) inclusos são:
+
 - Pontuações em tempo real: todos participantes acompanham os carros se moverem e a contagem de cliques sendo atualizada durante a partida, instigando mais competição e mais interação.
 - Times balanceados: conforme os participantes entram na sessão os times são designados de forma a balancear a quantidade entre os times
 - Início coordenado: os participantes devem começar a clicar no mesmo momento, e durante 20 segundos. Para isso o sistema deve comunicar todos os participantes sobre o início da partida no mesmo momento.
@@ -80,7 +81,7 @@ Acks controla o número de réplicas que precisam confirmar a durabilidade da me
 
 ### enable.auto.commit
 
-Esta configuração faz com que o client faça commit nos offsets de mensagens de forma automática — basicamente informar para o broker que a mensagem foi consumida. É mais performático e recomendado fazer isso manualmente de acordo com a necessidade da aplicação. Nesta demo faz sentido ter habilitado. 
+Esta configuração faz com que o client faça commit nos offsets de mensagens de forma automática — basicamente informar para o broker que a mensagem foi consumida. É mais performático e recomendado fazer isso manualmente de acordo com a necessidade da aplicação. Nesta demo faz sentido ter habilitado.
 
 ### fetch.min.bytes = 1
 
@@ -118,4 +119,4 @@ Entender como tunar o Kafka para entregar com maior rapidez é muito importante 
 
 O Vert.x neste contexto de aplicação dirigida por eventos teve um ótimo fit, possibilitando criar objetos "atores” com seus ciclos de vida independentes e com gestão abstraída de threads, temporizadores e afins, de forma que não há, por exemplo, uma necessidade de desenvolver um orquestrador/controlador, já que há uma semântica pub/sub, ou tratar os eventos de forma stateless, com o conceito de verticles.
 
-Todo o código envolvido no projeto estão disponível [neste repositório do GitHub](https://github.com/mrmorais/racing-cars-demo).
+Todo o código envolvido no projeto está disponível [neste repositório do GitHub](https://github.com/mrmorais/racing-cars-demo).
