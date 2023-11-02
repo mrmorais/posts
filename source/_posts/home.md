@@ -1,7 +1,7 @@
 # 🤠
 
 <div style="float: right;">Status do Home Lab: <span id="homelab-sts">verificando...</span></div>
-<small style="color: #919191;">Mais recentemente atualizado em 16 de dezembro de 2022</small>
+<small style="color: #919191;">Mais recentemente atualizado em 2 de novembro de 2023</small>
 <br/><br/>
 
 [💻 GitHub](https://github.com/mrmorais) [📝 Medium](https://medium.com/@mrmorais)
