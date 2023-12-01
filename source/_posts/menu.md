@@ -1,5 +1,8 @@
 - [Home](/)
 - [Sobre](/about)
+- 2023
+  - Novembro
+    - [Data Product com Apache Pinot: Personalização em "tempo real"](/data-product-com-apache-pinot-personalizacao-em-tempo-real)
 - 2022
   - Outubro
     - [Retorno de processamento assíncrono com Redis e GraphQL Subscriptions](/Retorno-de-processamento-assincrono-com-Redis-e-GraphQL-Subscriptions)

@@ -1,17 +1,16 @@
 # 🤠
 
 <div style="float: right;">Status do Home Lab: <span id="homelab-sts">verificando...</span></div>
-<small style="color: #919191;">Mais recentemente atualizado em 2 de novembro de 2023</small>
+<small style="color: #919191;">Mais recentemente atualizado em 30 de novembro de 2023</small>
 <br/><br/>
 
 [💻 GitHub](https://github.com/mrmorais) [📝 Medium](https://medium.com/@mrmorais)
 
 > Este é um blog pessoal sobre tópicos de tecnologia, desenvolvimento de software e outros temas.
 
-Pressione `m`
-
 ### Últimas Publicações
 
+- [Data Product com Apache Pinot: Personalização em "tempo real"](/data-product-com-apache-pinot-personalizacao-em-tempo-real) 30/11/2023
 - [Criando um jogo interativo "real-time" com Kafka, kSQL e Vert.x](/criando-um-jogo-interativo-real-time-com-kafka-ksql-e-vert-x) 16/12/2022
 - [Retorno de processamento assíncrono com Redis e GraphQL Subscriptions](/Retorno-de-processamento-assincrono-com-Redis-e-GraphQL-Subscriptions) 15/10/2022
 - [Testes com Consumer-Driven Contracts](/Testes-com-Consumer-Driven-Contracts) 24/10/2019
