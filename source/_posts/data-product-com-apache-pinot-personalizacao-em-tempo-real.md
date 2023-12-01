@@ -240,7 +240,7 @@ A ideia aqui foi explorar alguns conceitos de processamento de dados com base em
 
 Espero que tenha conseguindo compreender bem essa aplicação. Diferentemente de outros projetos aqui no posts não criei nenhum repositório com o código utilizado, principalmente para ter um artigo mais fluido e sem muito foco em código por sí
 
-Temos um outro artigo “**[Criando um jogo interativo “real-time” com Kafka, kSQL e Vert.x](https://posts.mrmorais.com/criando-um-jogo-interativo-real-time-com-kafka-ksql-e-vert-x/)**” que está relacionado a este tema em que criamos um jogo de interação real-time utilizando Kafka. Devo trazer mais artigos sobre processamento e stream de dados, assim como sobre técnicas de personalização, collaborative filtering e outros.
+Temos um outro artigo “[Criando um jogo interativo “real-time” com Kafka, kSQL e Vert.x](https://posts.mrmorais.com/criando-um-jogo-interativo-real-time-com-kafka-ksql-e-vert-x/)” que está relacionado a este tema em que criamos um jogo de interação real-time utilizando Kafka. Devo trazer mais artigos sobre processamento e stream de dados, assim como sobre técnicas de personalização, collaborative filtering e outros.
 
 ### Links e Recomendações
 
