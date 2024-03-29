@@ -1,5 +1,8 @@
 - [Home](/)
 - [Sobre](/about)
+- 2024
+  - Março
+    - [Assistente Visual: Integrando LLMs e Dispositivos Móveis](/assistente-visual-integrando-llms-e-dispositivos-moveis)
 - 2023
   - Novembro
     - [Data Product com Apache Pinot: Personalização em "tempo real"](/data-product-com-apache-pinot-personalizacao-em-tempo-real)
