@@ -1,7 +1,7 @@
 # 🤠
 
 <div style="float: right;">Status do Home Lab: <span id="homelab-sts">verificando...</span></div>
-<small style="color: #919191;">Mais recentemente atualizado em 30 de novembro de 2023</small>
+<small style="color: #919191;">Mais recentemente atualizado em 29 de março de 2024</small>
 <br/><br/>
 
 [💻 GitHub](https://github.com/mrmorais) [📝 Medium](https://medium.com/@mrmorais)
@@ -10,6 +10,7 @@
 
 ### Últimas Publicações
 
+- [Assistente Visual: Integrando LLMs e Dispositivos Móveis](/assistente-visual-integrando-llms-e-dispositivos-moveis)
 - [Data Product com Apache Pinot: Personalização em "tempo real"](/data-product-com-apache-pinot-personalizacao-em-tempo-real) 30/11/2023
 - [Criando um jogo interativo "real-time" com Kafka, kSQL e Vert.x](/criando-um-jogo-interativo-real-time-com-kafka-ksql-e-vert-x) 16/12/2022
 - [Retorno de processamento assíncrono com Redis e GraphQL Subscriptions](/Retorno-de-processamento-assincrono-com-Redis-e-GraphQL-Subscriptions) 15/10/2022
@@ -19,7 +20,6 @@
 - [C++eleste - Jogo da cobrinha autônomo](/C-eleste-Jogo-da-cobrinha-autonomo) 17/06/2017
 - [ECMAScript 6 e como usar](/ecmascript-6-e-como-usar) 23/03/2017
 - [Aplicação real-time com socket.io (parte 1)](/Aplicacao-real-time-com-socket-io-pt-1) 22/03/2017
-- [Scraprice - API de monitoramento de preços](/Scraprice-API-de-monitoramento-de-precos) 21/05/2016
 
 ### Projetos
 
