@@ -16,7 +16,7 @@ Minha ideia então foi desenvolver um assistente visual, dentro de um aplicativo
 
 Demonstrações
 
-<div style="display: flex;">
+<div style="display: flex; overflow-x: scroll; gap:40px; padding: 0px 20px; margin: 0px -40px;">
     <figure style="width: 33.3%;display: flex;flex-direction:column;align-items: center;">
       <video style="border-radius: 4px;" width="200" heigth="400" controls autoplay muted loop>
         <source src="../videos/vis_assist_youtube.mp4" type="video/mp4" />
@@ -41,8 +41,6 @@ Vários modelos multimodais conseguem atender ao primeiro passo como o GPT-4V e 
 
 Por fim, a interface mais natural para esse tipo de agente é a voz, então utilizei o STT e Speech APIs do Google. A organização geral da aplicação ficou assim:
 
-<figure>
-  <img src="../images/vis_assist_overall.png" style="width:73%">
-</figure>
+<img src="../images/vis_assist_overall.png" style="width:100%">
 
 Acredito que essa solução tem uma viabilidade em aplicativos móveis, já existem em menor escala e pode ser um caminho que a indústria vai explorar com mais força uma vez que essa infusão se tornar mais performática com modelos menores e mais portáteis. Senão em smarthphones, em dispositivos multifuncionais como a Meta já abertamente vem desenvolvendo. O que resta saber é com qual facilidade esses assistentes serão adotados e se tornarão mainstream.
