@@ -21,6 +21,20 @@
 - [ECMAScript 6 e como usar](/ecmascript-6-e-como-usar) 23/03/2017
 - [Aplicação real-time com socket.io (parte 1)](/Aplicacao-real-time-com-socket-io-pt-1) 22/03/2017
 
+### Model Zoo
+
+#### Knee Osteoarthritis Classifier
+
+<div style="display: flex; align-items: center;">
+  <img src="../images/knee-class-grad.png" width="180px;" style="margin-right: 10px;" />
+  <div>
+
+A fine-tuned ResNet 18 model trained on 3k+ images across 3 classes of osteoarthritis conditions (normal, osteopenia, osteoporosis). The model achieves 72% on the test set. The used [dataset](https://www.kaggle.com/datasets/fuyadhasanbhoyan/knee-osteoarthritis-classification-224224) is from Kaggle datasets.
+[🔗 Demo](ml/knee-osteoarthritis/) | [📄 Notebook](ml/knee-osteoarthritis/notebook.html)
+
+  </div>
+</div>
+
 ### Projetos
 
 ![](../images/fingpt-logo.png)
